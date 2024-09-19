@@ -3,7 +3,7 @@ extends layout
 
 block content
     container.form-container
-        h2 Login
+        h2 Register
         form
             .form-group
                 label(for='exampleInputEmail1') Email address
@@ -12,6 +12,9 @@ block content
             .form-group
                 label(for='exampleInputPassword1') Password
                 input#exampleInputPassword1.form-control(type='password', placeholder='Password')
+            .form-group
+                label(for='exampleInputPassword2') Confirm Password
+                input#exampleInputPassword2.form-control(type='password', placeholder='Password')
             div.mt-3
-                a(href='/auth/register') I don&apos;t have an account
+                a(href='/auth/login') I already have an account
             button.btn.btn-primary(type='submit') Submit
