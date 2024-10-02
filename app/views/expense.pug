@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .container
+    .row.justify-content-center
+      .col-10
+        table.table.table-dark
+          thead
+            tr
+              th(scope='col') #
+              th(scope='col') Name
+              th(scope='col') Amount
+              th(scope='col') Category
+          tbody
+            each expense, index in expenses
+              tr
+                th(scope='row')= index + 1
+                td= expense.name
+                td= expense.amount
+                td= expense.category
