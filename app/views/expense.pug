@@ -1,20 +1,40 @@
 extends layout
 
 block content
+  // Navbar
+  div(style='border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: gray;height:30px;')
+    div(style='float:left;line-height:30px;') Expense Tracker
+    button.edit_button(type='button' style='float: right;') Logout
+
   .container
-    .row.justify-content-center
+    .row.justify-content-center.mt-4
       .col-10
-        table.table.table-dark
+        .card
+          .card-body
+            h5.card-title Expense Summary
+            p.card-text
+              | Total Amount Spent: $500
+              br
+              | Highest Expense: $100 on Rent
+              br
+              | Entertainment: $150
+              br
+              | Groceries: $200
+              br
+              | Utilities: $50
+
+    // Expenses Table
+    .row.justify-content-center.mt-4
+      .col-10
+        table.table.table-striped
           thead
             tr
-              th(scope='col') #
               th(scope='col') Name
               th(scope='col') Amount
               th(scope='col') Category
           tbody
             each expense in expenses
               tr
-                th(scope='row')= expense.id
                 td= expense.name
                 td= expense.amount
                 td= expense.category

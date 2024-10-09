@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container
+    .row.justify-content-center
+      .col-12.text-center
+        h1.display-4 Expense Tracker
+        p.lead Manage your expenses efficiently
+        .mt-4
+          a.btn.btn-primary.btn-lg(href='/auth/login') Login
+          a.btn.btn-secondary.btn-lg.ml-2(href='/auth/register') Register
