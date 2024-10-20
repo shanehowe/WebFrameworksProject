@@ -1,14 +1,15 @@
 doctype html
 html
   head
-    title= title
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='preload', href='/stylesheets/bootstrap.min.css', as='style', onload="this.onload=null;this.rel='stylesheet'")
-    noscript
-      link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    title Express with Bootstrap
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    // Bootstrap CSS (via CDN)
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
   body
-    script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
-    script(src='/javascripts/bootstrap.min.js')
     block content
+
+    // Bootstrap JS and dependencies (via CDN)
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')

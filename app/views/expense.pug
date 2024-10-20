@@ -1,32 +1,41 @@
 extends layout
 
 block content
-  // Navbar
-  div(style='border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: gray;height:30px;')
-    div(style='float:left;line-height:30px;') Expense Tracker
-    button.edit_button(type='button' style='float: right;') Logout
 
-  .container
-    .row.justify-content-center.mt-4
-      .col-10
-        .card
-          .card-body
-            h5.card-title Expense Summary
-            p.card-text
-              | Total Amount Spent: $500
-              br
-              | Highest Expense: $100 on Rent
-              br
-              | Entertainment: $150
-              br
-              | Groceries: $200
-              br
-              | Utilities: $50
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    a.navbar-brand(href='/expense') Expense Tracker
+    button.btn.btn-outline-danger.ml-auto(type='button') Logout
 
-    // Expenses Table
-    .row.justify-content-center.mt-4
-      .col-10
-        table.table.table-striped
+
+  .container.mt-4
+
+    .row.mb-4
+      .col-md-12
+        div.card.border-0
+          div.card-body
+            h5.card-title.text-center.mb-4 Expense Statistics
+            // Modern stats display using flexbox
+            .d-flex.justify-content-around
+              .text-center
+                h6 Total Spend This Month
+                p.card-text.font-weight-bold $500
+              .text-center
+                h6 Highest Purchase
+                p.card-text.font-weight-bold $200
+              .text-center
+                h6 Groceries
+                p.card-text.font-weight-bold $150
+              .text-center
+                h6 Entertainment
+                p.card-text.font-weight-bold $100
+              .text-center
+                h6 Travel
+                p.card-text.font-weight-bold $50
+
+
+    .row
+      .col-md-12
+        table.table.table-hover.text-center 
           thead
             tr
               th(scope='col') Name
@@ -37,4 +46,4 @@ block content
               tr
                 td= expense.name
                 td= expense.amount
-                td= expense.category
+                td= expense.category 
