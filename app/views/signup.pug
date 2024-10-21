@@ -5,7 +5,7 @@ block content
     .col-md-6.col-lg-4
       .form-container
         h2.text-center.mb-4 Register
-        form
+        form(action='/expense', method='get')
           .form-group
             label(for='exampleInputEmail1') Email address
             input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email')
