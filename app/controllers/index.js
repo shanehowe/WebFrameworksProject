@@ -1,4 +1,4 @@
-import views from '../utils/view-constants';
+const views = require("../utils/view-constants");
 
 /**
  * Renders the index page.
