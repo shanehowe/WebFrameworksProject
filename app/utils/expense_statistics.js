@@ -1,3 +1,7 @@
+/**
+ * @param {import('../models/expenseModel')[]} expenses
+ * @returns {Object.<string, number>}
+ */
 function aggregateExpenses(expenses) {
   return {
     total: calculateTotal(expenses),
@@ -7,7 +11,8 @@ function aggregateExpenses(expenses) {
 }
 
 /**
- * @param {import('../models/expense').Expense[]} expenses
+ * @param {import('../models/expenseModel')[]} expenses
+ * @returns {number}
  */
 function calculateTotal(expenses) {
   return expenses.reduce((total, expense) => total + expense.amount, 0);
@@ -15,7 +20,8 @@ function calculateTotal(expenses) {
 
 /**
  *
- * @param {import('../models/expense').Expense[]} expenses
+ * @param {import('../models/expenseModel')[]} expenses
+ * @returns {number}
  */
 function getMaxPurchase(expenses) {
   return expenses.reduce((max, expense) => Math.max(max, expense.amount), 0);
@@ -23,17 +29,18 @@ function getMaxPurchase(expenses) {
 
 /**
  * 
- * @param {import('../models/expense').Expense[]} expenses
+ * @param {import('../models/expenseModel')[]} expenses
  * @returns {Object.<string, number>}
  */
 function sumCategories(expenses) {
   const categories = {};
 
   expenses.forEach(expense => {
-    if (categories[expense.category]) {
-      categories[expense.category] += expense.amount;
+    const category = expense.category.toLowerCase();
+    if (categories[category]) {
+      categories[category] += expense.amount;
     } else {
-      categories[expense.category] = expense.amount;
+      categories[category] = expense.amount;
     }
   });
 
