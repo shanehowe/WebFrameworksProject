@@ -4,6 +4,10 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+
+const User = require("./app/models/userModel");
 
 const indexRouter = require("./app/routes/index");
 const authRouter = require("./app/routes/auth");
@@ -42,5 +46,18 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+app.use(require("express-session")({
+  secret: "keyboard cat",
+  resave: false,
+  saveUninitialized: false,
+}));
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 module.exports = app;

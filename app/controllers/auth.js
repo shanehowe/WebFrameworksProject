@@ -1,4 +1,5 @@
 const views = require("../utils/view-constants");
+const httpClient = require("../utils/http-client");
 
 /**
  * Renders the login page.
@@ -21,7 +22,18 @@ function renderRegisterPage(_request, response) {
   response.render(views.signup);
 }
 
+async function registerUser(request, response) {
+  const { email, password } = request.body;
+  try {
+    await httpClient.post("/user/register", { email, password });
+    response.redirect("/login");
+  } catch (error) {
+    response.render(views.signup, { error: "Please ensure all values are filled out" });
+  }
+}
+
 module.exports = {
   renderLogInPage,
   renderRegisterPage,
+  registerUser,
 };
