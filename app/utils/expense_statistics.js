@@ -1,6 +1,6 @@
 /**
  * @param {import('../models/expenseModel')[]} expenses
- * @returns {Object.<string, number>}
+ * @returns {{total: number, categories: Object<string, number>, maxPurchase: number}}
  */
 function aggregateExpenses(expenses) {
   return {

@@ -1,12 +1,24 @@
-const User = require('../../models/userModel');
+const User = require("../../models/userModel");
 
 async function register(request, response) {
-  const { email, password } = request.body;
-  if (!email || !password) {
-    response.status(400).end();
+  const { username, password, confirmPassword } = request.body;
+  if (!username || !password) {
+    response.status(400).json({ error: "Username and password are required" });
     return;
   }
-  const user = new User({ email });
+
+  if (password !== confirmPassword) {
+    response.status(400).json({ error: "Passwords do not match" });
+    return;
+  }
+
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    response.status(400).json({ error: "User already exists" });
+    return;
+  }
+
+  const user = new User({ username });
   await user.setPassword(password);
   await user.save();
   response.status(201).json(user);

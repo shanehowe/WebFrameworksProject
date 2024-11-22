@@ -5,8 +5,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-
+const LocalStrategy = require("passport-local");
 const User = require("./app/models/userModel");
 
 const indexRouter = require("./app/routes/index");
@@ -15,6 +14,21 @@ const expenseRouter = require("./app/routes/expense");
 const apiRouter = require("./app/api");
 
 const app = express();
+
+app.use(
+  require("express-session")({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // view engine setup
 app.set("views", path.join(__dirname, "app/views"));
@@ -46,18 +60,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-app.use(require("express-session")({
-  secret: "keyboard cat",
-  resave: false,
-  saveUninitialized: false,
-}));
-
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 module.exports = app;

@@ -5,14 +5,13 @@ block content
     .col-md-6.col-lg-4
       .form-container
         h2.text-center.mb-4 Login
-        form(action='/expense', method='get')
+        form(action='/api/login', method='post')
           .form-group
-            label(for='exampleInputEmail1') Email address
-            input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email')
-            small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+            label(for='usernameInput') Username
+            input#usernameInput.form-control(type='text', placeholder='Enter username' name='username')
           .form-group
             label(for='exampleInputPassword1') Password
-            input#exampleInputPassword1.form-control(type='password', placeholder='Password')
+            input#exampleInputPassword1.form-control(type='password', placeholder='Password' name='password')
           div.mt-3
             a(href='/auth/register') I don&apos;t have an account
           button.btn.btn-primary.btn-block(type='submit') Submit
