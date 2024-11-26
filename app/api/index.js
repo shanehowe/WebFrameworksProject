@@ -18,5 +18,6 @@ router.post("/login", (req, res) => {
     successRedirect: "/expense",
   })(req, res);
 });
+router.get("/logout", userController.logOutUser);
 
 module.exports = router;

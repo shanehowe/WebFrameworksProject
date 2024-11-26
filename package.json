@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "cd ./expense-tracker-frontend && ng build --configuration production && cd .. && node ./bin/www"
   },
   "dependencies": {
     "@angular/cli": "^18.2.11",

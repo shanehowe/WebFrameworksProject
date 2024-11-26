@@ -24,6 +24,12 @@ async function register(request, response) {
   response.status(201).json(user);
 }
 
+function logOutUser(request, response) {
+  request.session.destroy();
+  response.redirect("/");
+}
+
 module.exports = {
   register,
+  logOutUser,
 };

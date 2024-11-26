@@ -1,8 +1,17 @@
 const Expense = require("../../models/expenseModel");
+const { aggregateExpenses } = require("../../utils/expense_statistics");
 
-async function getAllExpenses(request, response) {
+async function getAllExpenses(_request, response) {
   const expenses = await Expense.find();
-  response.status(200).json(expenses);
+  const statistics = aggregateExpenses(expenses);
+  const statsResponse = {
+    total: statistics.total,
+    maxPurchase: statistics.maxPurchase,
+    food: statistics.categories.food || 0,
+    entertainment: statistics.categories.entertainment || 0,
+    travel: statistics.categories.travel || 0,
+  }
+  response.status(200).json({ expenses, ...statsResponse });
 }
 
 async function createExpense(request, response) {

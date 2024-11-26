@@ -1,7 +1,6 @@
-require("./app/models/db");
-const createError = require("http-errors");
-const express = require("express");
 const path = require("path");
+const express = require("express");
+const createError = require("http-errors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const passport = require("passport");
@@ -14,6 +13,16 @@ const expenseRouter = require("./app/routes/expense");
 const apiRouter = require("./app/api");
 
 const app = express();
+
+// view engine setup
+app.set("views", path.join(__dirname, "app/views"));
+app.set("view engine", "pug");
+
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   require("express-session")({
@@ -30,20 +39,16 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// view engine setup
-app.set("views", path.join(__dirname, "app/views"));
-app.set("view engine", "pug");
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/expense", expenseRouter);
 app.use("/api", apiRouter);
+
+app.use(express.static(path.join(__dirname, "expense-tracker-frontend/dist/expense-tracker-frontend")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "expense-tracker-frontend/dist/expense-tracker-frontend/index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
