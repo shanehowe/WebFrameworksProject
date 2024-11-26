@@ -3,4 +3,4 @@ node_modules
 .DS_Store
 start.sh
 .idea
-expense-tracker-frontend_1
+expense-tracker-frontend
