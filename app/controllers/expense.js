@@ -10,15 +10,14 @@ const httpClient = require("../utils/http-client");
  */
 async function renderExpensePage(_request, response) {
   const apiResponse = await httpClient.get("/expense");
-  const expenses = apiResponse.data;
-  const statistics = aggregateExpenses(expenses);
+  const result = apiResponse.data;
   response.render(views.expense, {
-    expenses: expenses,
-    total: statistics.total,
-    maxPurchase: statistics.maxPurchase,
-    food: statistics.categories.food || 0,
-    entertainment: statistics.categories.entertainment || 0,
-    travel: statistics.categories.travel || 0,
+    expenses: result.expenses,
+    total: result.total,
+    maxPurchase: result.maxPurchase,
+    food: result.food || 0,
+    entertainment: result.entertainment || 0,
+    travel: result.travel || 0,
   });
 }
 

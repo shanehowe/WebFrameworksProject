@@ -1,48 +1,10 @@
 extends layout
 
 block content
+  
+  app-expense-page
 
-  nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    a.navbar-brand(href='/expense') Expense Tracker
-    button.btn.btn-outline-danger.ml-auto(type='button') Logout
-
-
-  .container.mt-4
-
-    .row.mb-4
-      .col-md-12
-        div.card.border-0
-          div.card-body
-            h5.card-title.text-center.mb-4 Expense Statistics
-            .d-flex.justify-content-around
-              .text-center
-              h6 Total Spend This Month
-              p.card-text.font-weight-bold &euro; #{total}
-              .text-center
-              h6 Highest Purchase
-              p.card-text.font-weight-bold &euro; #{maxPurchase}
-              .text-center
-              h6 Food
-              p.card-text.font-weight-bold &euro; #{food}
-              .text-center
-              h6 Entertainment
-              p.card-text.font-weight-bold &euro; #{entertainment}
-              .text-center
-              h6 Travel
-              p.card-text.font-weight-bold &euro; #{travel}
-
-
-    .row
-      .col-md-12
-        table.table.table-hover.text-center 
-          thead
-            tr
-              th(scope='col') Name
-              th(scope='col') Amount
-              th(scope='col') Category
-          tbody
-            each expense in expenses
-              tr
-                td= expense.name
-                td= expense.amount
-                td= expense.category 
+block scripts
+  script(src='/polyfills.9d3b1e9deb7f05e1.js')
+  script(src='/main.1423d8c2d19c804e.js')
+  script(src="/runtime.5208027f706e9586.js")

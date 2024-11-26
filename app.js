@@ -23,6 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'app_public')));
 
 app.use(
   require("express-session")({
@@ -43,12 +44,6 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/expense", expenseRouter);
 app.use("/api", apiRouter);
-
-app.use(express.static(path.join(__dirname, "expense-tracker-frontend/dist/expense-tracker-frontend")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "expense-tracker-frontend/dist/expense-tracker-frontend/index.html"));
-});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
