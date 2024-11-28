@@ -3,8 +3,12 @@ const express = require("express");
 const createError = require("http-errors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const fs = require("fs");
+const https = require("https");
+
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+
 const User = require("./app/models/userModel");
 
 const indexRouter = require("./app/routes/index");
@@ -23,7 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, 'app_public')));
+app.use(express.static(path.join(__dirname, "app_public")));
 
 app.use(
   require("express-session")({
@@ -60,5 +64,21 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+if (process.env.NODE_ENV === "development") {
+  if (fs.existsSync("sslcert/key.pem") && fs.existsSync("sslcert/cert.pem")) {
+    const privateKey = fs.readFileSync("sslcert/key.pem", "utf8");
+    const certificate = fs.readFileSync("sslcert/cert.pem", "utf8");
+
+    const credentials = { key: privateKey, cert: certificate };
+
+    const httpsServer = https.createServer(credentials, app);
+
+    httpsServer.listen(8000, () => {
+      console.log("HTTPS Server running on port 8000");
+      console.log("Visit https://localhost:8000");
+    });
+  }
+}
 
 module.exports = app;

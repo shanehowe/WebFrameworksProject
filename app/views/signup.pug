@@ -1,22 +1,41 @@
 extends layout
 
 block content
-  .d-flex.justify-content-center.align-items-center.min-vh-100
+  .d-flex.justify-content-center.align-items-center.min-vh-100.bg-light
     .col-md-6.col-lg-4
-      .form-container
-        h2.text-center.mb-4 Register
-        if error
-          .alert.alert-danger(role='alert') #{error}
-        form(action='/auth/register', method='post')
-          .form-group
-            label(for='usernameInput') Username
-            input#usernameInput.form-control(type='text', name='username', placeholder='Enter username')
-          .form-group
-            label(for='exampleInputPassword1') Password
-            input#exampleInputPassword1.form-control(type='password', name='password', placeholder='Password')
-          .form-group
-            label(for='exampleInputPassword2') Confirm Password
-            input#exampleInputPassword2.form-control(type='password', name='confirmPassword', placeholder='Password')
-          div.mt-3
-            a(href='/auth/login') I already have an account
-          button.btn.btn-primary.btn-block(type='submit') Submit
+      .card.shadow-lg
+        .card-body
+          h2.text-center.mb-4
+            i.fas.fa-user-plus.text-primary.mr-2
+            | Create Your Account
+          if error
+            .alert.alert-danger(role='alert') #{error}
+          form(action='/auth/register', method='post')
+            .form-group
+              label(for='usernameInput') Username
+              div.input-group
+                div.input-group-prepend
+                  span.input-group-text
+                    i.fas.fa-user
+                input#usernameInput.form-control(type='text', name='username', placeholder='Enter username', required)
+            .form-group
+              label(for='passwordInput') Password
+              div.input-group
+                div.input-group-prepend
+                  span.input-group-text
+                    i.fas.fa-lock
+                input#passwordInput.form-control(type='password', name='password', placeholder='Enter password', required)
+            .form-group
+              label(for='confirmPasswordInput') Confirm Password
+              div.input-group
+                div.input-group-prepend
+                  span.input-group-text
+                    i.fas.fa-lock
+                input#confirmPasswordInput.form-control(type='password', name='confirmPassword', placeholder='Confirm password', required)
+            button.btn.btn-primary.btn-block.mt-4(type='submit')
+              i.fas.fa-user-plus.mr-2
+              | Register
+            .text-center.mt-3
+              p
+                | Already have an account?
+                a(href='/auth/login') Login

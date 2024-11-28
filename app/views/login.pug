@@ -1,17 +1,32 @@
 extends layout
 
 block content
-  .d-flex.justify-content-center.align-items-center.min-vh-100
+  .d-flex.justify-content-center.align-items-center.min-vh-100.bg-light
     .col-md-6.col-lg-4
-      .form-container
-        h2.text-center.mb-4 Login
-        form(action='/api/login', method='post')
-          .form-group
-            label(for='usernameInput') Username
-            input#usernameInput.form-control(type='text', placeholder='Enter username' name='username')
-          .form-group
-            label(for='exampleInputPassword1') Password
-            input#exampleInputPassword1.form-control(type='password', placeholder='Password' name='password')
-          div.mt-3
-            a(href='/auth/register') I don&apos;t have an account
-          button.btn.btn-primary.btn-block(type='submit') Submit
+      .card.shadow-lg
+        .card-body
+          h2.text-center.mb-4
+            i.fas.fa-sign-in-alt.text-primary.mr-2
+            | Welcome Back
+          form(action='/api/login', method='post')
+            .form-group
+              label(for='usernameInput') Username
+              .input-group
+                .input-group-prepend
+                  span.input-group-text
+                    i.fas.fa-user
+                input#usernameInput.form-control(type='text', placeholder='Enter username', name='username', required)
+            .form-group
+              label(for='passwordInput') Password
+              .input-group
+                .input-group-prepend
+                  span.input-group-text
+                    i.fas.fa-lock
+                input#passwordInput.form-control(type='password', placeholder='Enter password', name='password', required)
+            button.btn.btn-primary.btn-block.mt-4(type='submit')
+              i.fas.fa-sign-in-alt.mr-2
+              | Login
+            .text-center.mt-3
+              p
+                | Don't have an account?
+                a(href='/auth/register') Register

@@ -1,12 +1,72 @@
 extends layout
 
 block content
-  
-  .container.mt-5.text-center
-    h1 Welcome to Expense Tracker
 
-    .row.justify-content-center.mt-4
-      .col-auto
-        a.btn.btn-primary.btn-lg(href='/auth/register') Register
-      .col-auto
-        a.btn.btn-secondary.btn-lg(href='/auth/login') Login
+  // Hero Section
+  .jumbotron.text-center.text-white.bg-primary.mb-0
+    h1.display-3.font-weight-bold Welcome to Expense Tracker
+    p.lead.mt-3 Manage your expenses effortlessly with our intuitive platform.
+    .mt-4
+      a.btn.btn-light.btn-lg.mr-2(href='/auth/register')
+        i.fas.fa-user-plus.mr-2
+        | Get Started
+      a.btn.btn-outline-light.btn-lg(href='/auth/login')
+        i.fas.fa-sign-in-alt.mr-2
+        | Login
+
+  // Features Section
+  .container.py-5
+    h2.text-center.mb-5 Empower Your Financial Journey
+    .row
+      .col-md-4.text-center
+        i.fas.fa-bolt.fa-3x.text-primary.mb-3
+        h4 Fast and Easy
+        p Easily track your expenses with a user-friendly interface.
+      .col-md-4.text-center
+        i.fas.fa-shield-alt.fa-3x.text-primary.mb-3
+        h4 Secure and Private
+        p Your data is protected with top-notch security measures.
+      .col-md-4.text-center
+        i.fas.fa-chart-line.fa-3x.text-primary.mb-3
+        h4 Insightful Reports
+        p Gain valuable insights with detailed analytics.
+
+  // Testimonials Section
+  .bg-light.py-5
+    .container
+      h2.text-center.mb-5 What Our Users Say
+      .row
+        .col-md-6.mx-auto
+          .carousel.slide#testimonialCarousel(data-ride='carousel')
+            .carousel-inner
+              .carousel-item.active
+                blockquote
+                  p "Expense Tracker has transformed the way I handle my finances!"
+                  footer - Alex D.
+              .carousel-item
+                blockquote
+                  p "A must-have tool for anyone looking to manage expenses efficiently."
+                  footer - Jamie K.
+            a.carousel-control-prev(href='#testimonialCarousel', role='button', data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#testimonialCarousel', role='button', data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+
+  // Call to Action
+  .container.text-center.py-5
+    h2 Ready to Take Control of Your Expenses?
+    a.btn.btn-primary.btn-lg.mt-3(href='/auth/register')
+      i.fas.fa-rocket.mr-2
+      | Join Now
+
+  // Footer
+  footer.footer.mt-5.py-4.bg-dark.text-white
+    .container
+      .row
+        .col-md-6
+          p.mb-0 &copy; 2023 Expense Tracker. All rights reserved.
+        .col-md-6.text-md-right
+          a.text-white.mr-3(href='#') Privacy Policy
+          a.text-white(href='#') Terms of Service
