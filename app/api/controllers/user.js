@@ -21,7 +21,7 @@ async function register(request, response) {
   const user = new User({ username });
   await user.setPassword(password);
   await user.save();
-  response.status(201).json(user);
+  response.status(201).json({ username: user.username });
 }
 
 function logOutUser(request, response) {
